@@ -103,11 +103,14 @@ extension NoteDetailsView {
                 Text(note.content ?? "")
                     .lineLimit(nil)
             }
-            Button("Edit") {
-                viewModel.prepareForUpdate()
-            }
-            .frame(maxWidth: .infinity)
         }
+        Spacer()
+        Button(action: {
+            viewModel.prepareForUpdate()
+        }) {
+            CTALabel(title: "Edit")
+        }
+        Spacer()
     }
 }
 

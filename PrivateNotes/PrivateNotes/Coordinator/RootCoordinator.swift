@@ -12,6 +12,8 @@ final class RootCoordinator: ObservableObject {
     @Published var navigationPath: NavigationPath
     let viewContext: NSManagedObjectContext
     
+    @State var isAuthenticated: Bool = false
+    
     init(navigationPath: NavigationPath,
          context: NSManagedObjectContext) {
         self.navigationPath = navigationPath
@@ -20,7 +22,11 @@ final class RootCoordinator: ObservableObject {
 
     @ViewBuilder
     func view() -> some View {
-        RootView()
+        if isAuthenticated {
+             RootView()
+        } else {
+            LoginView()
+        }
     }
 }
 
