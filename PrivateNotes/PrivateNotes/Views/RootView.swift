@@ -2,7 +2,7 @@
 //  RootView.swift
 //  PrivateNotes
 //
-//  Created by X_coder on 13/06/2024.
+//  Created by Xinghou.Liu on 13/06/2024.
 //
 
 import SwiftUI
