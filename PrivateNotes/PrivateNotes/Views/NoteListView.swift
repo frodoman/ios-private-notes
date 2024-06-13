@@ -14,48 +14,21 @@ struct NoteListView<ViewModelType>: View where ViewModelType: NoteListViewModeli
     @ObservedObject
     var viewModel: ViewModelType
     
+    var flowHandler: NoteFlowHandler?
+    
     var body: some View {
-        NavigationView {
-            
-            VStack {
-                switch (viewModel.status) {
-                    
-                case .notStarted,
-                     .fetching:
-                        ProgressView()
-                   
-                case .error(let error):
-                    ErrorView(error: error)
-                
-                case .ready(let notes):
-                    List {
-                        ForEach(notes) { item in
-                            NavigationLink {
-                                NoteDetailsView(viewModel: NoteDetailsViewModel(presentType: .readOnly(item),
-                                                                                viewContext: viewModel.viewContext))
-                            } label: {
-                                Text(item.title ?? "")
-                            }
-                        }
-                        .onDelete(perform: deleteItems)
-                    }
-                
-                }
+
+        notesContentView()
+        .onAppear {
+            viewModel.fetchNotes()
+        }
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                EditButton()
             }
-            .onAppear {
-                viewModel.fetchNotes()
-            }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-                ToolbarItem {
-                    NavigationLink {
-                        NoteDetailsView(viewModel: NoteDetailsViewModel(presentType: .create,
-                                                                        viewContext: viewModel.viewContext))
-                    } label: {
-                        Label("Add Item", systemImage: "plus")
-                    }
+            ToolbarItem {
+                Button("New", systemImage: "plus") {
+                    self.flowHandler?(.createNew)
                 }
             }
         }
@@ -66,8 +39,35 @@ struct NoteListView<ViewModelType>: View where ViewModelType: NoteListViewModeli
             viewModel.deleteNote(offsets: offsets)
         }
     }
+    
+    @ViewBuilder
+    private func notesContentView() -> some View {
+        VStack {
+            switch (viewModel.status) {
+                
+            case .notStarted,
+                 .fetching:
+                    ProgressView()
+               
+            case .error(let error):
+                ErrorView(error: error)
+            
+            case .ready(let notes):
+                List {
+                    ForEach(notes) { item in
+                        Button(item.title ?? "") {
+                            self.flowHandler?(.didSelect(item))
+                        }
+                    }
+                    .onDelete(perform: deleteItems)
+                }
+            }
+        }
+    }
 }
 
 #Preview {
-    NoteListView(viewModel: MockNoteListViewModel(targetStatus: .ready(Note.mockNotes()), viewContext:  PersistenceController.preview.container.viewContext))
+    NavigationView {
+        NoteListView(viewModel: MockNoteListViewModel(targetStatus: .ready(Note.mockNotes()), viewContext:  PersistenceController.preview.container.viewContext))
+    }
 }

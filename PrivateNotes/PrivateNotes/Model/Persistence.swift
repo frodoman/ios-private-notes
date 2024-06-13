@@ -37,3 +37,9 @@ struct PersistenceController {
         container.viewContext.automaticallyMergesChangesFromParent = true
     }
 }
+
+extension PersistenceController {
+    static var viewContext: NSManagedObjectContext {
+        PersistenceController.shared.container.viewContext
+    }
+}

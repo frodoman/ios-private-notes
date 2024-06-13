@@ -8,7 +8,7 @@
 import Foundation
 import CoreData
 
-class MockNoteListViewModel: NoteListViewModeling {
+final class MockNoteListViewModel: NoteListViewModeling {
     
     var targetStatus: NoteFetchingStatus?
     var status: NoteFetchingStatus = .notStarted

@@ -24,7 +24,7 @@ enum NoteFetchingStatus {
     case error(Error)
 }
 
-class NoteListViewModel: NoteListViewModeling {
+final class NoteListViewModel: NoteListViewModeling {
     
     @Published
     var status: NoteFetchingStatus = .notStarted

@@ -9,10 +9,10 @@ import SwiftUI
 
 struct NoteDetailsView<ViewModelType>: View where ViewModelType: NoteDetailsViewModeling {
 
-    @Environment(\.presentationMode) var presenationMode
-    
     @ObservedObject
     var viewModel: ViewModelType
+    
+    var flowHandler: NoteFlowHandler?
     
     var body: some View {
         Group {
@@ -72,7 +72,7 @@ extension NoteDetailsView {
                 
                 Button(action: {
                     saveNote()
-                    presenationMode.wrappedValue.dismiss()
+                    self.flowHandler?(.didSave)
                 }, label: {
                     Text("Save")
                 })

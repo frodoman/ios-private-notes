@@ -21,13 +21,31 @@ protocol NoteDetailsViewModeling: ObservableObject {
 }
 
 enum NoteDetailsPresentType {
+    
     case create
     case readOnly(Note)
     case update(Note)
     case error(Error)
 }
 
-class NoteDetailsViewModel: NoteDetailsViewModeling {
+extension NoteDetailsPresentType: Hashable {
+    
+    static func == (lhs: NoteDetailsPresentType, rhs: NoteDetailsPresentType) -> Bool {
+        lhs.id == rhs.id
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+}
+
+extension NoteDetailsPresentType: Identifiable {
+    var id: UUID {
+        UUID()
+    }
+}
+
+final class NoteDetailsViewModel: NoteDetailsViewModeling {
 
     @Published
     var presentType: NoteDetailsPresentType

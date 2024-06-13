@@ -7,7 +7,7 @@
 
 import CoreData
 
-class MockNoteDetailsViewModel: NoteDetailsViewModeling {
+final class MockNoteDetailsViewModel: NoteDetailsViewModeling {
     
     var noteTitle: String
     
