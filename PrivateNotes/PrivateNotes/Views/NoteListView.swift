@@ -22,9 +22,6 @@ struct NoteListView<ViewModelType>: View where ViewModelType: NoteListViewModeli
             self.viewModel.fetchNotes()
         }
         .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
-                EditButton()
-            }
             ToolbarItem {
                 Button("New", systemImage: "plus") {
                     self.flowHandler?(.createNew)
@@ -61,6 +58,8 @@ struct NoteListView<ViewModelType>: View where ViewModelType: NoteListViewModeli
                     .onDelete(perform: deleteItems)
                 }
             }
+            Spacer()
+            Text("Swipe to left on a cell to delete")
         }
     }
 }

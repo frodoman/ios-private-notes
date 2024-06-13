@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct NoteDetailsView<ViewModelType>: View where ViewModelType: NoteDetailsViewModeling {
-
-    @Environment(\.isPresented) var isPresented
-
+    
+    @Environment(\.presentationMode) var presentationMode
+    
     @ObservedObject
     var viewModel: ViewModelType
     
@@ -31,11 +31,13 @@ struct NoteDetailsView<ViewModelType>: View where ViewModelType: NoteDetailsView
         .onAppear {
             loadNote()
         }
-        .onChange(of: isPresented) { showing in
-            if !showing {
+        .navigationBarBackButtonHidden(true)
+        .navigationBarItems(leading: Button(action : {
+                self.presentationMode.wrappedValue.dismiss()
                 self.flowHandler?(.dismissDetails)
-            }
-        }
+        }) {
+            Image(systemName: "arrow.left")
+        })
     }
     
     private func saveNote() {
@@ -67,6 +69,7 @@ extension NoteDetailsView {
             Section {
                 Button(action: {
                     viewModel.cancelUpdate()
+                    self.flowHandler?(.dismissDetails)
                 }, label: {
                     Text("Cancel")
                 })

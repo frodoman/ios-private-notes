@@ -49,7 +49,7 @@ final class NoteCoordinator: ObservableObject {
             switch type {
             case .dismissDetails,
                     .didSave:
-                self.navigationPath.removeLast()
+                self.navigationPath.removeLast(self.navigationPath.count)
             default:
                 break
             }
