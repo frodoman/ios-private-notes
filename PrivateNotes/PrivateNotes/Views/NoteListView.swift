@@ -8,32 +8,37 @@
 import SwiftUI
 import CoreData
 
-struct ContentView: View {
+struct NoteListView: View {
     @Environment(\.managedObjectContext) private var viewContext
 
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Note.timestamp, ascending: true)],
         animation: .default)
-    private var items: FetchedResults<Note>
+    private var notes: FetchedResults<Note>
 
     var body: some View {
         NavigationView {
             List {
-                ForEach(items) { item in
+                ForEach(notes) { item in
                     NavigationLink {
-                        Text("Item at \(item.timestamp!, formatter: itemFormatter)")
+                        NoteDetailsView(presentType: .readOnly(item))
                     } label: {
-                        Text(item.timestamp!, formatter: itemFormatter)
+                        Text(item.title ?? "")
                     }
                 }
                 .onDelete(perform: deleteItems)
+                
+                
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     EditButton()
                 }
                 ToolbarItem {
-                    Button(action: addItem) {
+                
+                    NavigationLink {
+                        NoteDetailsView(presentType: .create)
+                    } label: {
                         Label("Add Item", systemImage: "plus")
                     }
                 }
@@ -60,7 +65,7 @@ struct ContentView: View {
 
     private func deleteItems(offsets: IndexSet) {
         withAnimation {
-            offsets.map { items[$0] }.forEach(viewContext.delete)
+            offsets.map { notes[$0] }.forEach(viewContext.delete)
 
             do {
                 try viewContext.save()
@@ -74,13 +79,14 @@ struct ContentView: View {
     }
 }
 
-private let itemFormatter: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.dateStyle = .short
-    formatter.timeStyle = .medium
-    return formatter
-}()
+//private let itemFormatter: DateFormatter = {
+//    let formatter = DateFormatter()
+//    formatter.dateStyle = .short
+//    formatter.timeStyle = .medium
+//    return formatter
+//}()
 
 #Preview {
-    ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+    NoteListView()
+        .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
 }
