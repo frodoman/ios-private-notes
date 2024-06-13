@@ -2,7 +2,7 @@
 //  NoteDetailsView.swift
 //  PrivateNotes
 //
-//  Created by X_coder on 12/06/2024.
+//  Created by Xinghou.Liu on 12/06/2024.
 //
 
 import SwiftUI
@@ -86,23 +86,25 @@ extension NoteDetailsView {
             
             Section("Title") {
                 TextField("Title: ", text: $noteTitle)
-                    .padding()
-                    .background(Color.gray)
+                    .textFieldStyle(.roundedBorder)
             }
             
             Section("Content") {
                 TextField("Content", text: $noteContent)
-                    .padding()
-                    .background(Color.gray)
+                    .textFieldStyle(.roundedBorder)
             }
             
             Section {
+                
+                // Add a cancel button
+                
                 Button(action: {
                     saveNote()
                     presenationMode.wrappedValue.dismiss()
                 }, label: {
                     Text("Save")
                 })
+                .frame(maxWidth: .infinity)
             }
             
         }
@@ -124,10 +126,11 @@ extension NoteDetailsView {
                 noteContent = note.content ?? ""
                 self.presentType = .update(note)
             }
+            .frame(maxWidth: .infinity)
         }
     }
 }
 
 #Preview {
-    NoteDetailsView(presentType: .update(Note(title: "ABC", content: "This is a mock info for the content of a note")))
+    NoteDetailsView(presentType: .readOnly(Note(title: "ABC", content: "This is a mock info for the content of a note")))
 }

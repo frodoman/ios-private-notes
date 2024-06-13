@@ -21,6 +21,7 @@
 		872C43582C19D0D900910FEA /* Persistence+Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 872C43572C19D0D900910FEA /* Persistence+Preview.swift */; };
 		872C435C2C19EC8A00910FEA /* NoteDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 872C435B2C19EC8A00910FEA /* NoteDetailsView.swift */; };
 		872C435E2C19F01500910FEA /* Note+Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 872C435D2C19F01500910FEA /* Note+Preview.swift */; };
+		872C43602C1B0AEB00910FEA /* NoteListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 872C435F2C1B0AEB00910FEA /* NoteListViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,7 @@
 		872C43572C19D0D900910FEA /* Persistence+Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Persistence+Preview.swift"; sourceTree = "<group>"; };
 		872C435B2C19EC8A00910FEA /* NoteDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDetailsView.swift; sourceTree = "<group>"; };
 		872C435D2C19F01500910FEA /* Note+Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Note+Preview.swift"; sourceTree = "<group>"; };
+		872C435F2C1B0AEB00910FEA /* NoteListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteListViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,6 +170,7 @@
 		872C435A2C19EBED00910FEA /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				872C435F2C1B0AEB00910FEA /* NoteListViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -310,6 +313,7 @@
 				872C43262C19B84300910FEA /* NoteListView.swift in Sources */,
 				872C43242C19B84300910FEA /* PrivateNotesApp.swift in Sources */,
 				872C43562C19CD6B00910FEA /* Note+CoreDataProperties.swift in Sources */,
+				872C43602C1B0AEB00910FEA /* NoteListViewModel.swift in Sources */,
 				872C435C2C19EC8A00910FEA /* NoteDetailsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
