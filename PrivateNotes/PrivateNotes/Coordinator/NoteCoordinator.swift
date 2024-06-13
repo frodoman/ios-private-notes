@@ -36,5 +36,18 @@ final class NoteCoordinator: ObservableObject {
                 
             }
         }
+        .navigationDestination(for: NoteDetailsPresentType.self) { presentType in
+            self.noteDetailsView(presentType: presentType)
+        }
+    }
+    
+    @ViewBuilder
+    func noteDetailsView(presentType: NoteDetailsPresentType) -> some View {
+        NoteDetailsView(viewModel: NoteDetailsViewModel(presentType: presentType,
+                                                        viewContext: PersistenceController.viewContext)) { type in
+            if case .didSave = type {
+                self.navigationPath.removeLast()
+            }
+        }
     }
 }

@@ -14,14 +14,6 @@ struct RootView: View {
         NoteCoordinator(navigationPath: $rootCoordinator.navigationPath,
                         viewContext: rootCoordinator.viewContext)
                         .view()
-                        .navigationDestination(for: NoteDetailsPresentType.self) { presentType in
-                            NoteDetailsView(viewModel: NoteDetailsViewModel(presentType: presentType,
-                                                                            viewContext: PersistenceController.viewContext)) { type in
-                                if case .didSave = type {
-                                    rootCoordinator.navigationPath.removeLast()
-                                }
-                            }
-                        }
     }
 }
 
