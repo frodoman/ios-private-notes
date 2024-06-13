@@ -10,10 +10,10 @@ import CoreData
 
 protocol NoteListViewModeling: ObservableObject {
     var status: NoteFetchingStatus {get}
+    init(viewContext: NSManagedObjectContext)
     
     func fetchNotes()
-    
-    init(viewContext: NSManagedObjectContext)
+    func deleteNote(offsets: IndexSet)
 }
 
 enum NoteFetchingStatus {
@@ -42,6 +42,20 @@ class NoteListViewModel: NoteListViewModeling {
             let notes = try viewContext.fetch(request)
             self.status = .ready(notes)
             
+        } catch {
+            self.status = .error(error)
+        }
+    }
+    
+    func deleteNote(offsets: IndexSet) {
+        guard case .ready(let notes) = status else {
+            return
+        }
+        
+        offsets.map { notes[$0] }.forEach(viewContext.delete)
+
+        do {
+            try viewContext.save()
         } catch {
             self.status = .error(error)
         }
