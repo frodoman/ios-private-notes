@@ -13,8 +13,7 @@ struct PrivateNotesApp: App {
 
     var body: some Scene {
         WindowGroup {
-            NoteListView()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            NoteListView(viewModel: NoteListViewModel(viewContext: persistenceController.container.viewContext))
         }
     }
 }

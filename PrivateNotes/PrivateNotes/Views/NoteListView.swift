@@ -8,27 +8,43 @@
 import SwiftUI
 import CoreData
 
-struct NoteListView: View {
+struct NoteListView<ViewModelType>: View where ViewModelType: NoteListViewModeling {
     @Environment(\.managedObjectContext) private var viewContext
 
-    @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Note.timestamp, ascending: true)],
-        animation: .default)
-    private var notes: FetchedResults<Note>
-
+    @ObservedObject
+    var viewModel: ViewModelType
+    
     var body: some View {
         NavigationView {
-            List {
-                ForEach(notes) { item in
-                    NavigationLink {
-                        NoteDetailsView(presentType: .readOnly(item))
-                    } label: {
-                        Text(item.title ?? "")
+            
+            Group {
+                switch (viewModel.status) {
+                case .notStarted,
+                     .fetching:
+                    ProgressView()
+                case .error(let error):
+                    Text("Error: \(error.localizedDescription)")
+                        .foregroundStyle(.red)
+                
+                case .ready(let notes):
+                    List {
+                        ForEach(notes) { item in
+                            NavigationLink {
+                                NoteDetailsView(presentType: .readOnly(item))
+                            } label: {
+                                Text(item.title ?? "")
+                            }
+                        }
+                        //.onDelete(perform: deleteItems)
                     }
+                
                 }
-                .onDelete(perform: deleteItems)
                 
                 
+                
+            }
+            .onAppear {
+                viewModel.fetchNotes()
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -63,20 +79,20 @@ struct NoteListView: View {
         }
     }
 
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            offsets.map { notes[$0] }.forEach(viewContext.delete)
-
-            do {
-                try viewContext.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
-        }
-    }
+//    private func deleteItems(offsets: IndexSet) {
+//        withAnimation {
+//            offsets.map { notes[$0] }.forEach(viewContext.delete)
+//
+//            do {
+//                try viewContext.save()
+//            } catch {
+//                // Replace this implementation with code to handle the error appropriately.
+//                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+//                let nsError = error as NSError
+//                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+//            }
+//        }
+//    }
 }
 
 //private let itemFormatter: DateFormatter = {
@@ -87,6 +103,6 @@ struct NoteListView: View {
 //}()
 
 #Preview {
-    NoteListView()
-        .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+    NoteListView(viewModel: MockNoteListViewModel(targetStatus: .ready(Note.mockNotes()), viewContext:  PersistenceController.preview.container.viewContext))
+//        .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
 }

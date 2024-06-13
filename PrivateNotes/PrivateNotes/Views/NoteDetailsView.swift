@@ -132,5 +132,5 @@ extension NoteDetailsView {
 }
 
 #Preview {
-    NoteDetailsView(presentType: .readOnly(Note(title: "ABC", content: "This is a mock info for the content of a note")))
+    NoteDetailsView(presentType: .readOnly(Note.mockWith(title: "ABC", content: "This is a mock info for the content of a note")))
 }

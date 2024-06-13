@@ -9,16 +9,24 @@ import Foundation
 
 extension Note {
     
-    public convenience init(title: String,
-                            content: String?) {
-
+    static func mockWith(title: String, content: String?) -> Note {
         let viewContext = PersistenceController.preview.container.viewContext
-        self.init(context: viewContext)
+        let note = Note(context: viewContext)
+        note.title = title
+        note.content = content
+        note.id = UUID()
+        note.timestamp = Date()
         
-        self.title = title
-        self.content = content
-        self.id = UUID()
-        self.timestamp = Date()
+        return note
     }
     
+    static func mockNotes() -> [Note] {
+        let mockNotes: [Note] = [
+            Note.mockWith(title: "Title 1", content: "Content 1"),
+            Note.mockWith(title: "Title 2", content: "Content 2"),
+            Note.mockWith(title: "Title 3", content: "Content 3"),
+            Note.mockWith(title: "Title 4", content: "Content 5"),
+        ]
+        return mockNotes
+    }
 }
