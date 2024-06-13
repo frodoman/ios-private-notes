@@ -24,10 +24,11 @@ final class NoteCoordinator: ObservableObject {
     
     @ViewBuilder
     func view() -> some View {
-        NoteListView(viewModel: listViewModel) { flowType in
+        NoteListView(viewModel: NoteListViewModel(viewContext: viewContext)) { flowType in
             switch(flowType) {
-            case .didSave:
-                self.navigationPath.removeLast()
+            case .didSave,
+                 .dismissDetails:
+                break
             case .createNew:
                 self.navigationPath.append(NoteDetailsPresentType.create)
                 
@@ -44,9 +45,13 @@ final class NoteCoordinator: ObservableObject {
     @ViewBuilder
     func noteDetailsView(presentType: NoteDetailsPresentType) -> some View {
         NoteDetailsView(viewModel: NoteDetailsViewModel(presentType: presentType,
-                                                        viewContext: PersistenceController.viewContext)) { type in
-            if case .didSave = type {
+                                                        viewContext: viewContext)) { type in
+            switch type {
+            case .dismissDetails,
+                    .didSave:
                 self.navigationPath.removeLast()
+            default:
+                break
             }
         }
     }

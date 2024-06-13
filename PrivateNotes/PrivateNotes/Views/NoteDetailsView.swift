@@ -9,6 +9,8 @@ import SwiftUI
 
 struct NoteDetailsView<ViewModelType>: View where ViewModelType: NoteDetailsViewModeling {
 
+    @Environment(\.isPresented) var isPresented
+
     @ObservedObject
     var viewModel: ViewModelType
     
@@ -28,6 +30,11 @@ struct NoteDetailsView<ViewModelType>: View where ViewModelType: NoteDetailsView
         }
         .onAppear {
             loadNote()
+        }
+        .onChange(of: isPresented) { showing in
+            if !showing {
+                self.flowHandler?(.dismissDetails)
+            }
         }
     }
     

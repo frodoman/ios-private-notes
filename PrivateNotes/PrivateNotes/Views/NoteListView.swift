@@ -9,8 +9,7 @@ import SwiftUI
 import CoreData
 
 struct NoteListView<ViewModelType>: View where ViewModelType: NoteListViewModeling {
-    @Environment(\.managedObjectContext) private var viewContext
-
+    
     @ObservedObject
     var viewModel: ViewModelType
     
@@ -20,7 +19,7 @@ struct NoteListView<ViewModelType>: View where ViewModelType: NoteListViewModeli
 
         notesContentView()
         .onAppear {
-            viewModel.fetchNotes()
+            self.viewModel.fetchNotes()
         }
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {

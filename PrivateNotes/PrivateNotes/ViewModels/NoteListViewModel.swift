@@ -29,7 +29,7 @@ final class NoteListViewModel: NoteListViewModeling {
     @Published
     var status: NoteFetchingStatus = .notStarted
     
-    var viewContext:  NSManagedObjectContext
+    var viewContext: NSManagedObjectContext
     
     required init(viewContext: NSManagedObjectContext) {
         self.viewContext = viewContext

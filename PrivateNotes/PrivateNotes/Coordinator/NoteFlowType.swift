@@ -12,6 +12,7 @@ enum NoteFlowType {
     case createNew
     case didSelect(Note)
     case didSave
+    case dismissDetails
 }
 
 typealias NoteFlowHandler = ((NoteFlowType)->Void)
