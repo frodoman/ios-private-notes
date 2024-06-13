@@ -17,20 +17,22 @@ struct NoteListView<ViewModelType>: View where ViewModelType: NoteListViewModeli
     var body: some View {
         NavigationView {
             
-            Group {
+            VStack {
                 switch (viewModel.status) {
+                    
                 case .notStarted,
                      .fetching:
-                    ProgressView()
+                        ProgressView()
+                   
                 case .error(let error):
-                    Text("Error: \(error.localizedDescription)")
-                        .foregroundStyle(.red)
+                    ErrorView(error: error)
                 
                 case .ready(let notes):
                     List {
                         ForEach(notes) { item in
                             NavigationLink {
-                                NoteDetailsView(presentType: .readOnly(item))
+                                NoteDetailsView(viewModel: NoteDetailsViewModel(presentType: .readOnly(item),
+                                                                                viewContext: viewModel.viewContext))
                             } label: {
                                 Text(item.title ?? "")
                             }
@@ -48,9 +50,9 @@ struct NoteListView<ViewModelType>: View where ViewModelType: NoteListViewModeli
                     EditButton()
                 }
                 ToolbarItem {
-                
                     NavigationLink {
-                        NoteDetailsView(presentType: .create)
+                        NoteDetailsView(viewModel: NoteDetailsViewModel(presentType: .create,
+                                                                        viewContext: viewModel.viewContext))
                     } label: {
                         Label("Add Item", systemImage: "plus")
                     }

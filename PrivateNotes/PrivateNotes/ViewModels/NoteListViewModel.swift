@@ -5,11 +5,12 @@
 //  Created by Xinghou.Liu on 13/06/2024.
 //
 
-import Combine
 import CoreData
 
 protocol NoteListViewModeling: ObservableObject {
-    var status: NoteFetchingStatus {get}
+    var status: NoteFetchingStatus { get }
+    var viewContext: NSManagedObjectContext {get}
+    
     init(viewContext: NSManagedObjectContext)
     
     func fetchNotes()
@@ -28,7 +29,7 @@ class NoteListViewModel: NoteListViewModeling {
     @Published
     var status: NoteFetchingStatus = .notStarted
     
-    private var viewContext:  NSManagedObjectContext
+    var viewContext:  NSManagedObjectContext
     
     required init(viewContext: NSManagedObjectContext) {
         self.viewContext = viewContext

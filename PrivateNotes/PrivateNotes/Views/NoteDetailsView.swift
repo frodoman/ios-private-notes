@@ -7,30 +7,23 @@
 
 import SwiftUI
 
-enum NoteDetailsPresentType {
-    case create
-    case readOnly(Note)
-    case update(Note)
-}
+struct NoteDetailsView<ViewModelType>: View where ViewModelType: NoteDetailsViewModeling {
 
-struct NoteDetailsView: View {
-    
-    @Environment(\.managedObjectContext) private var viewContext
     @Environment(\.presentationMode) var presenationMode
     
-    @State var noteTitle: String = ""
-    @State var noteContent: String = ""
-    
-    @State var presentType: NoteDetailsPresentType
+    @ObservedObject
+    var viewModel: ViewModelType
     
     var body: some View {
         Group {
-            switch self.presentType {
+            switch viewModel.presentType {
             case .create,
-                    .update:
+                 .update:
                 newOrUpdateNoteView()
             case .readOnly(let note):
                 readOnlyNoteView(note: note)
+            case .error(let error):
+                ErrorView(error: error)
             }
         }
         .onAppear {
@@ -39,42 +32,11 @@ struct NoteDetailsView: View {
     }
     
     private func saveNote() {
-        var currentNote: Note?
-        
-        switch presentType {
-        case .create:
-            break
-        case .readOnly(let note),
-             .update(let note):
-            currentNote = note
-        }
-        
-        if currentNote == nil {
-            currentNote = Note(context: viewContext)
-            currentNote?.id = UUID()
-            currentNote?.timestamp = Date()
-        }
-        
-        currentNote?.title = noteTitle
-        currentNote?.content = noteContent
-        
-        do {
-            try self.viewContext.save()
-        } catch {
-            // TODO - handle errors
-            print("Failed to save CoreData: ", error)
-        }
+        viewModel.save()
     }
     
     private func loadNote() {
-        switch presentType {
-        case .readOnly(let note),
-             .update(let note):
-            self.noteTitle = note.title ?? ""
-            self.noteContent = note.content ?? ""
-        case .create:
-            break
-        }
+
     }
 }
 
@@ -85,18 +47,28 @@ extension NoteDetailsView {
         Form {
             
             Section("Title") {
-                TextField("Title: ", text: $noteTitle)
+                TextField("Title: ", text: $viewModel.noteTitle)
                     .textFieldStyle(.roundedBorder)
             }
             
             Section("Content") {
-                TextField("Content", text: $noteContent)
+                TextField("Content", text: $viewModel.noteContent)
                     .textFieldStyle(.roundedBorder)
             }
             
+            // Cancel button
             Section {
-                
-                // Add a cancel button
+                Button(action: {
+                    viewModel.cancelUpdate()
+                }, label: {
+                    Text("Cancel")
+                })
+                .foregroundStyle(.red)
+                .frame(maxWidth: .infinity)
+            }
+            
+            // Save button
+            Section {
                 
                 Button(action: {
                     saveNote()
@@ -122,9 +94,7 @@ extension NoteDetailsView {
                     .lineLimit(nil)
             }
             Button("Edit") {
-                noteTitle = note.title ?? ""
-                noteContent = note.content ?? ""
-                self.presentType = .update(note)
+                viewModel.prepareForUpdate()
             }
             .frame(maxWidth: .infinity)
         }
@@ -132,5 +102,9 @@ extension NoteDetailsView {
 }
 
 #Preview {
-    NoteDetailsView(presentType: .readOnly(Note.mockWith(title: "ABC", content: "This is a mock info for the content of a note")))
+    NoteDetailsView(viewModel: MockNoteDetailsViewModel(presentType: .readOnly(Note.mock()),
+                                                        viewContext: PersistenceController.preview.container.viewContext))
+    
+                        
+                    
 }

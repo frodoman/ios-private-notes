@@ -12,7 +12,7 @@ class MockNoteListViewModel: NoteListViewModeling {
     
     var targetStatus: NoteFetchingStatus?
     var status: NoteFetchingStatus = .notStarted
-    private var viewContext: NSManagedObjectContext
+    var viewContext: NSManagedObjectContext
     
     convenience init(targetStatus: NoteFetchingStatus,
                      viewContext: NSManagedObjectContext) {

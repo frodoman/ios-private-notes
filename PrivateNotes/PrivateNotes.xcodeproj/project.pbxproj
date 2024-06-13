@@ -24,6 +24,9 @@
 		872C43602C1B0AEB00910FEA /* NoteListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 872C435F2C1B0AEB00910FEA /* NoteListViewModel.swift */; };
 		872C43632C1B106700910FEA /* MockNoteListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 872C43622C1B106700910FEA /* MockNoteListViewModel.swift */; };
 		872C43652C1B140500910FEA /* Error+Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 872C43642C1B140500910FEA /* Error+Preview.swift */; };
+		87A9CEF42C1B21A30051F4C7 /* NoteDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A9CEF32C1B21A30051F4C7 /* NoteDetailsViewModel.swift */; };
+		87A9CEF62C1B25BC0051F4C7 /* MockNoteDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A9CEF52C1B25BC0051F4C7 /* MockNoteDetailsViewModel.swift */; };
+		87A9CEF82C1B26940051F4C7 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A9CEF72C1B26940051F4C7 /* ErrorView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +67,9 @@
 		872C435F2C1B0AEB00910FEA /* NoteListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteListViewModel.swift; sourceTree = "<group>"; };
 		872C43622C1B106700910FEA /* MockNoteListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNoteListViewModel.swift; sourceTree = "<group>"; };
 		872C43642C1B140500910FEA /* Error+Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Error+Preview.swift"; sourceTree = "<group>"; };
+		87A9CEF32C1B21A30051F4C7 /* NoteDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDetailsViewModel.swift; sourceTree = "<group>"; };
+		87A9CEF52C1B25BC0051F4C7 /* MockNoteDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNoteDetailsViewModel.swift; sourceTree = "<group>"; };
+		87A9CEF72C1B26940051F4C7 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,6 +175,7 @@
 			children = (
 				872C43252C19B84300910FEA /* NoteListView.swift */,
 				872C435B2C19EC8A00910FEA /* NoteDetailsView.swift */,
+				87A9CEF72C1B26940051F4C7 /* ErrorView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -177,6 +184,7 @@
 			isa = PBXGroup;
 			children = (
 				872C435F2C1B0AEB00910FEA /* NoteListViewModel.swift */,
+				87A9CEF32C1B21A30051F4C7 /* NoteDetailsViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -185,6 +193,7 @@
 			isa = PBXGroup;
 			children = (
 				872C43622C1B106700910FEA /* MockNoteListViewModel.swift */,
+				87A9CEF52C1B25BC0051F4C7 /* MockNoteDetailsViewModel.swift */,
 			);
 			path = MockViewModels;
 			sourceTree = "<group>";
@@ -328,7 +337,10 @@
 				872C43632C1B106700910FEA /* MockNoteListViewModel.swift in Sources */,
 				872C43262C19B84300910FEA /* NoteListView.swift in Sources */,
 				872C43242C19B84300910FEA /* PrivateNotesApp.swift in Sources */,
+				87A9CEF42C1B21A30051F4C7 /* NoteDetailsViewModel.swift in Sources */,
+				87A9CEF82C1B26940051F4C7 /* ErrorView.swift in Sources */,
 				872C43562C19CD6B00910FEA /* Note+CoreDataProperties.swift in Sources */,
+				87A9CEF62C1B25BC0051F4C7 /* MockNoteDetailsViewModel.swift in Sources */,
 				872C43602C1B0AEB00910FEA /* NoteListViewModel.swift in Sources */,
 				872C435C2C19EC8A00910FEA /* NoteDetailsView.swift in Sources */,
 			);

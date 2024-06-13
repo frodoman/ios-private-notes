@@ -29,4 +29,8 @@ extension Note {
         ]
         return mockNotes
     }
+    
+    static func mock() -> Note {
+        mockNotes()[0]
+    }
 }
