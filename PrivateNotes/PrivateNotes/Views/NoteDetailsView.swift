@@ -74,6 +74,9 @@ extension NoteDetailsView {
         Section {
             Button(action: {
                 viewModel.cancelUpdate()
+                if case .create = viewModel.presentType {
+                    flowHandler?(.dismissDetails)
+                }
             }, label: {
                 CTALabel(title: "Cancel", style: .warning)
             })
