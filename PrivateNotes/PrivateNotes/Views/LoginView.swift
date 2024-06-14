@@ -17,8 +17,8 @@ struct LoginView: View {
             LoginCoordinator(navigationPath: $loginPath,
                              viewContext: rootCoordinator.viewContext)
             .view()
-            .environmentObject(rootCoordinator)
         }
+        .environmentObject(rootCoordinator)
     }
     
 }
