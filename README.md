@@ -1,11 +1,12 @@
 # Private Notes
 
-A simple SwiftUI (with CoreData) app to handle notes taking with CRUD (Create, Read, Update & Delete) functios.
+A simple SwiftUI (with CoreData) app to handle notes taking with CRUD (Create, Read, Update & Delete) functios in MVVM-C pattern.
 
 ## Notes
 * Due to the limitation of device, this app can only be tested on iOS 16.6 on a device,
 * In 'NoteListView', If the list of notes is not showing, please make sure you have created at least one note and try to click the 'Refresh' button, this is a navigation issue I am yet to fix. 
 * In the 'NoteDetailsView' there seams to be an issue with TextField from SwiftUI where the keyboard is getting hidden automatically, this could run OK on a device running iOS 17.0+.
+* Due to time limitation, only the 2 of the viewModels' functions are unit tested. More tests can be achieve by following the same pattern. 
 
 ## How to run 
 
@@ -23,6 +24,8 @@ Download the codes and double click the project file inside 'PrivateNotes' foler
 
 * SwiftUI
 * CoreData
-* Biomatric authentication 
+* MVVM-C
+* Biomatric authentication
+* TDD
 
  
