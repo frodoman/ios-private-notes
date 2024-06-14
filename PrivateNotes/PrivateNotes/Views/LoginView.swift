@@ -10,10 +10,15 @@ import SwiftUI
 struct LoginView: View {
     @EnvironmentObject var rootCoordinator: RootCoordinator
     
+    @State var loginPath = NavigationPath()
+    
     var body: some View {
-        LoginCoordinator(navigationPath: $rootCoordinator.navigationPath,
-                         viewContext: rootCoordinator.viewContext)
-        .view()
+        NavigationStack(path: $loginPath) {
+            LoginCoordinator(navigationPath: $loginPath,
+                             viewContext: rootCoordinator.viewContext)
+            .view()
+        }
+        .environmentObject(rootCoordinator)
     }
     
 }

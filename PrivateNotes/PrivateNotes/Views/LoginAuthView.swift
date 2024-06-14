@@ -26,6 +26,9 @@ struct LoginAuthView<ViewModelType>: View where ViewModelType: LoginViewModeling
                 rootCoordinator.isAuthenticated = true
                 presentationMode.wrappedValue.dismiss()
             }
+            else if case .loginFailed(_) = newValue {
+                flowHandler?(newValue)
+            }
         }
         
     }
