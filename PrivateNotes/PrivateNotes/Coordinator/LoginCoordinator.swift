@@ -1,14 +1,16 @@
 //
-//  NoteCoordinator.swift
+//  LoginCoordinator.swift
 //  PrivateNotes
 //
-//  Created by Xinghou.Liu on 13/06/2024.
+//  Created by Xinghou.Liu on 14/06/2024.
 //
 
 import SwiftUI
 import CoreData
 
-final class NoteCoordinator: ObservableObject {
+final class LoginCoordinator: ObservableObject {
+    
+    @Published var isAuthenticated: Bool = false
     
     @Binding var navigationPath: NavigationPath
     
@@ -22,23 +24,23 @@ final class NoteCoordinator: ObservableObject {
     
     @ViewBuilder
     func view() -> some View {
-        NoteListView(viewModel: NoteListViewModel(viewContext: viewContext)) { flowType in
-            switch(flowType) {
-            case .didSave,
-                 .dismissDetails:
+        LoginAuthView(viewModel: LoginViewModel()) { result in
+            switch result {
+            case .notStarted:
                 break
-            case .createNew:
-                self.navigationPath.append(NoteDetailsPresentType.create)
-                
-            case .didSelect(let note):
-                self.navigationPath.append(NoteDetailsPresentType.readOnly(note))
-                
+            case .loginFailed:
+                self.isAuthenticated = false
+                self.navigationPath.append(result)
+            case .loginSucceeded:
+                self.isAuthenticated = true
+                self.navigationPath.append(result)
             }
         }
-        .navigationDestination(for: NoteDetailsPresentType.self) { presentType in
-            self.noteDetailsView(presentType: presentType)
+        .navigationDestination(for: LoginResult.self) { result in
+            if case .loginFailed(let error) = result {
+                ErrorView(error: error)
+            }
         }
-        .navigationBarBackButtonHidden(true)
     }
     
     @ViewBuilder
@@ -48,10 +50,11 @@ final class NoteCoordinator: ObservableObject {
             switch type {
             case .dismissDetails,
                     .didSave:
-                self.navigationPath.removeLast(self.navigationPath.count)
+                self.navigationPath.removeLast()
             default:
                 break
             }
         }
     }
 }
+

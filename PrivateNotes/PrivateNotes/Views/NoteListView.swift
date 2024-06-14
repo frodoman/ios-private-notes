@@ -43,7 +43,17 @@ struct NoteListView<ViewModelType>: View where ViewModelType: NoteListViewModeli
                 
             case .notStarted,
                  .fetching:
+                VStack {
+                    Spacer()
                     ProgressView()
+                    Spacer()
+                    Button {
+                        viewModel.fetchNotes()
+                    } label: {
+                        CTALabel(title: "Refresh")
+                    }
+
+                }
                
             case .error(let error):
                 ErrorView(error: error)

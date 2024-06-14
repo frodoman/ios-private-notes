@@ -7,16 +7,21 @@
 
 import SwiftUI
 
-struct RootView: View {
+struct ContentView: View {
     @EnvironmentObject var rootCoordinator: RootCoordinator
+    
+    @State var showLogin: Bool = true
     
     var body: some View {
         NoteCoordinator(navigationPath: $rootCoordinator.navigationPath,
                         viewContext: rootCoordinator.viewContext)
                         .view()
+                        .fullScreenCover(isPresented: $showLogin) {
+                            LoginView()
+                        }
     }
 }
 
 #Preview {
-    RootView()
+    ContentView()
 }

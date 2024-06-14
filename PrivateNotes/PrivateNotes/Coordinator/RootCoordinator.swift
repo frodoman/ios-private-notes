@@ -10,9 +10,9 @@ import SwiftUI
 
 final class RootCoordinator: ObservableObject {
     @Published var navigationPath: NavigationPath
-    let viewContext: NSManagedObjectContext
     
-    @State var isAuthenticated: Bool = false
+    @Published var isAuthenticated: Bool = false
+    let viewContext: NSManagedObjectContext
     
     init(navigationPath: NavigationPath,
          context: NSManagedObjectContext) {
@@ -22,11 +22,9 @@ final class RootCoordinator: ObservableObject {
 
     @ViewBuilder
     func view() -> some View {
-        if isAuthenticated {
-             RootView()
-        } else {
-            LoginView()
-        }
+        
+        ContentView()
+
     }
 }
 
