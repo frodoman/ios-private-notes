@@ -6,11 +6,16 @@
 //
 
 import XCTest
+import Combine
+@testable import PrivateNotes
 
 final class NoteListViewModelTests: XCTestCase {
 
+    var viewModel: NoteListViewModel!
+    var cancelables: [AnyCancellable] = []
+    
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        viewModel = NoteListViewModel(viewContext: PersistenceController.preview.container.viewContext)
     }
 
     override func tearDownWithError() throws {
@@ -32,4 +37,26 @@ final class NoteListViewModelTests: XCTestCase {
         }
     }
 
+    func testFetchNotes() throws {
+        
+        // given
+        let exp = expectation(description: "Fetching notes")
+        var validNotes: [Note] = []
+        
+        viewModel.$status.sink { newStatus in
+            if case .ready(let notes) = newStatus {
+                validNotes = notes
+                exp.fulfill()
+            }
+        }
+        .store(in: &cancelables)
+        
+        // when
+        viewModel.fetchNotes()
+        
+        // then
+        wait(for: [exp], timeout: 2)
+        
+        XCTAssertTrue(validNotes.count > 0)
+    }
 }
