@@ -10,6 +10,8 @@ import CoreData
 
 struct NoteListView<ViewModelType>: View where ViewModelType: NoteListViewModeling {
     
+    @EnvironmentObject var rootCoordinator: RootCoordinator
+    
     @ObservedObject
     var viewModel: ViewModelType
     
@@ -18,8 +20,10 @@ struct NoteListView<ViewModelType>: View where ViewModelType: NoteListViewModeli
     var body: some View {
 
         notesContentView()
-        .onAppear {
-            self.viewModel.fetchNotes()
+        .onChange(of: rootCoordinator.isAuthenticated) { newValue in
+            if newValue {
+                self.viewModel.fetchNotes()
+            }
         }
         .toolbar {
             ToolbarItem {
