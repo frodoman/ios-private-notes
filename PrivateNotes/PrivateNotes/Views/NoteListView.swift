@@ -46,7 +46,8 @@ struct NoteListView<ViewModelType>: View where ViewModelType: NoteListViewModeli
             switch (viewModel.status) {
                 
             case .notStarted,
-                 .fetching:
+                 .fetching,
+                 .deleted:
                 VStack {
                     Spacer()
                     ProgressView()
@@ -71,6 +72,7 @@ struct NoteListView<ViewModelType>: View where ViewModelType: NoteListViewModeli
                     }
                     .onDelete(perform: deleteItems)
                 }
+                
             }
             Spacer()
             Text("Swipe to left on a cell to delete")

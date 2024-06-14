@@ -20,6 +20,7 @@ protocol NoteListViewModeling: ObservableObject {
 enum NoteFetchingStatus {
     case notStarted
     case fetching
+    case deleted(IndexSet)
     case ready([Note])
     case error(Error)
 }
@@ -57,6 +58,7 @@ final class NoteListViewModel: NoteListViewModeling {
 
         do {
             try viewContext.save()
+            self.status = .deleted(offsets)
         } catch {
             self.status = .error(error)
         }

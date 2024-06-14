@@ -59,4 +59,36 @@ final class NoteListViewModelTests: XCTestCase {
         
         XCTAssertTrue(validNotes.count > 0)
     }
+    
+    func testDeleteNote() throws {
+        
+        // given
+        let exp = expectation(description: "Deleting notes")
+        let indexSetToDelete: IndexSet = [0, 1]
+        var deletedSet: IndexSet = []
+
+        viewModel.status = .ready(Note.mockNotes())
+        
+        viewModel.$status.sink { newStatus in
+
+            switch newStatus {
+            case .deleted(let indexes):
+                deletedSet = indexes
+                exp.fulfill()
+                
+            default:
+                break
+            }
+        }
+        .store(in: &cancelables)
+        
+        // when
+        viewModel.deleteNote(offsets: indexSetToDelete)
+        
+        // then
+        wait(for: [exp], timeout: 2)
+        
+        XCTAssertTrue(deletedSet == indexSetToDelete)
+        
+    }
 }
