@@ -14,6 +14,7 @@ final class NoteCoordinator: ObservableObject {
     
     let viewContext: NSManagedObjectContext
     
+    
     init(navigationPath: Binding<NavigationPath>,
          viewContext: NSManagedObjectContext) {
         self._navigationPath = navigationPath

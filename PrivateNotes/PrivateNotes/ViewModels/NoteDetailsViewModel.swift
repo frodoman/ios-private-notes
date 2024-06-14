@@ -21,11 +21,11 @@ protocol NoteDetailsViewModeling: ObservableObject {
 }
 
 enum NoteDetailsPresentType {
-    
     case create
     case readOnly(Note)
     case update(Note)
     case error(Error)
+    case didSave(Note)
 }
 
 extension NoteDetailsPresentType: Hashable {
@@ -69,7 +69,8 @@ final class NoteDetailsViewModel: NoteDetailsViewModeling {
         
         switch presentType {
         case .create,
-             .error:
+             .error,
+             .didSave:
             break
         case .readOnly(let note),
              .update(let note):
@@ -82,11 +83,14 @@ final class NoteDetailsViewModel: NoteDetailsViewModeling {
             currentNote?.timestamp = Date()
         }
         
-        currentNote?.title = noteTitle
-        currentNote?.content = noteContent
+        guard let currentNote else { return }
+        
+        currentNote.title = noteTitle
+        currentNote.content = noteContent
         
         do {
             try self.viewContext.save()
+            presentType = .didSave(currentNote)
         } catch {
             presentType = .error(error)
         }

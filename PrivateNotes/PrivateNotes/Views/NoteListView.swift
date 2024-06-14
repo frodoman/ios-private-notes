@@ -22,14 +22,19 @@ struct NoteListView<ViewModelType>: View where ViewModelType: NoteListViewModeli
         notesContentView()
         .onChange(of: rootCoordinator.isAuthenticated) { newValue in
             if newValue {
-                self.viewModel.fetchNotes()
+                viewModel.fetchNotes()
             }
         }
         .toolbar {
             ToolbarItem {
                 Button("New", systemImage: "plus") {
-                    self.flowHandler?(.createNew)
+                    flowHandler?(.createNew)
                 }
+            }
+        }
+        .onAppear {
+            if rootCoordinator.isAuthenticated {
+                viewModel.fetchNotes()
             }
         }
     }
@@ -67,7 +72,7 @@ struct NoteListView<ViewModelType>: View where ViewModelType: NoteListViewModeli
                 List {
                     ForEach(notes) { item in
                         Button(item.title ?? "") {
-                            self.flowHandler?(.didSelect(item))
+                            flowHandler?(.didSelect(item))
                         }
                     }
                     .onDelete(perform: deleteItems)

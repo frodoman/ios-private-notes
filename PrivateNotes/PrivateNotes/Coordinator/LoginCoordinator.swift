@@ -29,7 +29,6 @@ final class LoginCoordinator: ObservableObject {
             case .notStarted:
                 break
             case .loginFailed:
-                self.isAuthenticated = false
                 self.navigationPath.append(result)
             case .loginSucceeded:
                 self.isAuthenticated = true

@@ -14,13 +14,16 @@ struct NoteDetailsView<ViewModelType>: View where ViewModelType: NoteDetailsView
     @ObservedObject
     var viewModel: ViewModelType
     
+    @FocusState private var isTitleFocus: Bool
+    
     var flowHandler: NoteFlowHandler?
     
     var body: some View {
         Group {
             switch viewModel.presentType {
             case .create,
-                 .update:
+                 .update,
+                 .didSave:
                 newOrUpdateNoteView()
             case .readOnly(let note):
                 readOnlyNoteView(note: note)
@@ -58,38 +61,38 @@ extension NoteDetailsView {
             Section("Title") {
                 TextField("Title: ", text: $viewModel.noteTitle)
                     .textFieldStyle(.roundedBorder)
+                    .focused($isTitleFocus)
             }
             
             Section("Content") {
                 TextField("Content", text: $viewModel.noteContent)
                     .textFieldStyle(.roundedBorder)
             }
-            
-            // Cancel button
-            Section {
-                Button(action: {
-                    viewModel.cancelUpdate()
-                    self.flowHandler?(.dismissDetails)
-                }, label: {
-                    Text("Cancel")
-                })
-                .foregroundStyle(.red)
-                .frame(maxWidth: .infinity)
-            }
-            
-            // Save button
-            Section {
-                
-                Button(action: {
-                    saveNote()
-                    self.flowHandler?(.didSave)
-                }, label: {
-                    Text("Save")
-                })
-                .frame(maxWidth: .infinity)
-            }
-            
         }
+        Spacer()
+        // Cancel button
+        Section {
+            Button(action: {
+                viewModel.cancelUpdate()
+            }, label: {
+                CTALabel(title: "Cancel", style: .warning)
+            })
+            .foregroundStyle(.red)
+            .frame(maxWidth: .infinity)
+        }
+        Spacer()
+        // Save button
+        Section {
+            
+            Button(action: {
+                saveNote()
+                self.flowHandler?(.didSave)
+            }, label: {
+                CTALabel(title: "Save")
+            })
+            .frame(maxWidth: .infinity)
+        }
+        Spacer()
     }
     
     @ViewBuilder 
@@ -107,6 +110,7 @@ extension NoteDetailsView {
         Spacer()
         Button(action: {
             viewModel.prepareForUpdate()
+            isTitleFocus = true
         }) {
             CTALabel(title: "Edit")
         }

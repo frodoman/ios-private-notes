@@ -11,10 +11,11 @@ import LocalAuthentication
 struct LoginAuthView<ViewModelType>: View where ViewModelType: LoginViewModeling {
     
     @Environment(\.presentationMode) var presentationMode
+    @Environment(\.isPresented) var isPresented
     
     @EnvironmentObject var rootCoordinator: RootCoordinator
     @ObservedObject var viewModel: ViewModelType
-    
+  
     var flowHandler: LoginFlowHandler?
     
     var body: some View {
@@ -22,6 +23,7 @@ struct LoginAuthView<ViewModelType>: View where ViewModelType: LoginViewModeling
             loginWithButtonView()
         }
         .onChange(of: viewModel.loginResult) { newValue in
+            
             if case .loginSucceeded = newValue {
                 rootCoordinator.isAuthenticated = true
                 presentationMode.wrappedValue.dismiss()

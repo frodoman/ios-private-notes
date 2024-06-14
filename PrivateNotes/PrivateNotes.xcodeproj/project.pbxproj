@@ -13,7 +13,6 @@
 		872C432B2C19B84400910FEA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 872C432A2C19B84400910FEA /* Preview Assets.xcassets */; };
 		872C432D2C19B84400910FEA /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 872C432C2C19B84400910FEA /* Persistence.swift */; };
 		872C43302C19B84400910FEA /* PrivateNotes.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 872C432E2C19B84400910FEA /* PrivateNotes.xcdatamodeld */; };
-		872C433A2C19B84400910FEA /* PrivateNotesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 872C43392C19B84400910FEA /* PrivateNotesTests.swift */; };
 		872C43442C19B84400910FEA /* PrivateNotesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 872C43432C19B84400910FEA /* PrivateNotesUITests.swift */; };
 		872C43462C19B84400910FEA /* PrivateNotesUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 872C43452C19B84400910FEA /* PrivateNotesUITestsLaunchTests.swift */; };
 		872C43552C19CD6B00910FEA /* Note+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 872C43532C19CD6B00910FEA /* Note+CoreDataClass.swift */; };
@@ -40,6 +39,7 @@
 		87A9CF122C1C0CDB0051F4C7 /* MockLoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A9CF112C1C0CDB0051F4C7 /* MockLoginViewModel.swift */; };
 		87A9CF142C1C109A0051F4C7 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A9CF132C1C109A0051F4C7 /* LoginView.swift */; };
 		87A9CF1A2C1C35760051F4C7 /* NoteListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A9CF192C1C35760051F4C7 /* NoteListViewModelTests.swift */; };
+		87A9CF1C2C1C44680051F4C7 /* NoteDetailsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A9CF1B2C1C44680051F4C7 /* NoteDetailsViewModelTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,7 +68,6 @@
 		872C432C2C19B84400910FEA /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		872C432F2C19B84400910FEA /* PrivateNotes.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PrivateNotes.xcdatamodel; sourceTree = "<group>"; };
 		872C43352C19B84400910FEA /* PrivateNotesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PrivateNotesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		872C43392C19B84400910FEA /* PrivateNotesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateNotesTests.swift; sourceTree = "<group>"; };
 		872C433F2C19B84400910FEA /* PrivateNotesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PrivateNotesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		872C43432C19B84400910FEA /* PrivateNotesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateNotesUITests.swift; sourceTree = "<group>"; };
 		872C43452C19B84400910FEA /* PrivateNotesUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateNotesUITestsLaunchTests.swift; sourceTree = "<group>"; };
@@ -97,6 +96,7 @@
 		87A9CF112C1C0CDB0051F4C7 /* MockLoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockLoginViewModel.swift; sourceTree = "<group>"; };
 		87A9CF132C1C109A0051F4C7 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		87A9CF192C1C35760051F4C7 /* NoteListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteListViewModelTests.swift; sourceTree = "<group>"; };
+		87A9CF1B2C1C44680051F4C7 /* NoteDetailsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDetailsViewModelTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,8 +174,8 @@
 		872C43382C19B84400910FEA /* PrivateNotesTests */ = {
 			isa = PBXGroup;
 			children = (
-				872C43392C19B84400910FEA /* PrivateNotesTests.swift */,
 				87A9CF192C1C35760051F4C7 /* NoteListViewModelTests.swift */,
+				87A9CF1B2C1C44680051F4C7 /* NoteDetailsViewModelTests.swift */,
 			);
 			path = PrivateNotesTests;
 			sourceTree = "<group>";
@@ -444,7 +444,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				87A9CF1A2C1C35760051F4C7 /* NoteListViewModelTests.swift in Sources */,
-				872C433A2C19B84400910FEA /* PrivateNotesTests.swift in Sources */,
+				87A9CF1C2C1C44680051F4C7 /* NoteDetailsViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
