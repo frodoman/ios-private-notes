@@ -40,6 +40,7 @@
 		87A9CF142C1C109A0051F4C7 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A9CF132C1C109A0051F4C7 /* LoginView.swift */; };
 		87A9CF1A2C1C35760051F4C7 /* NoteListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A9CF192C1C35760051F4C7 /* NoteListViewModelTests.swift */; };
 		87A9CF1C2C1C44680051F4C7 /* NoteDetailsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A9CF1B2C1C44680051F4C7 /* NoteDetailsViewModelTests.swift */; };
+		87A9CF1E2C1E40D50051F4C7 /* LAContexting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A9CF1D2C1E40D50051F4C7 /* LAContexting.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,6 +98,7 @@
 		87A9CF132C1C109A0051F4C7 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		87A9CF192C1C35760051F4C7 /* NoteListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteListViewModelTests.swift; sourceTree = "<group>"; };
 		87A9CF1B2C1C44680051F4C7 /* NoteDetailsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDetailsViewModelTests.swift; sourceTree = "<group>"; };
+		87A9CF1D2C1E40D50051F4C7 /* LAContexting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LAContexting.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -217,6 +219,7 @@
 				872C435F2C1B0AEB00910FEA /* NoteListViewModel.swift */,
 				87A9CEF32C1B21A30051F4C7 /* NoteDetailsViewModel.swift */,
 				87A9CF0F2C1C09230051F4C7 /* LoginViewModel.swift */,
+				87A9CF1D2C1E40D50051F4C7 /* LAContexting.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -414,6 +417,7 @@
 				872C43302C19B84400910FEA /* PrivateNotes.xcdatamodeld in Sources */,
 				87A9CF0A2C1BAC6E0051F4C7 /* Design.swift in Sources */,
 				872C43582C19D0D900910FEA /* Persistence+Preview.swift in Sources */,
+				87A9CF1E2C1E40D50051F4C7 /* LAContexting.swift in Sources */,
 				872C43552C19CD6B00910FEA /* Note+CoreDataClass.swift in Sources */,
 				872C435E2C19F01500910FEA /* Note+Preview.swift in Sources */,
 				87A9CF022C1B7B660051F4C7 /* ContentView.swift in Sources */,

@@ -34,6 +34,8 @@ struct LoginAuthView<ViewModelType>: View where ViewModelType: LoginViewModeling
     }
     
     private func requestAuthentication() {
+// TODO: This is just a temp solution to login when running on simulator
+// Should remove this in production codes
 #if targetEnvironment(simulator)
         rootCoordinator.isAuthenticated = true
 #else
@@ -60,5 +62,7 @@ struct LoginAuthView<ViewModelType>: View where ViewModelType: LoginViewModeling
 }
 
 #Preview {
-    LoginAuthView(viewModel: MockLoginViewModel(loginResult: .notStarted))
+    LoginAuthView(viewModel: MockLoginViewModel(context: MockLAContext(canEvaluate: true,
+                                                                      loginSucceed: true,
+                                                                      loginError: nil)))
 }

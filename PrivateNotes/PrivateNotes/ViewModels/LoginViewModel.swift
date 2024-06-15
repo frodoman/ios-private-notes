@@ -11,6 +11,8 @@ import LocalAuthentication
 protocol LoginViewModeling: ObservableObject {
     var loginResult: LoginResult { get }
     
+    init(context: LAContexting)
+    
     func login()
 }
 
@@ -19,13 +21,18 @@ final class LoginViewModel: LoginViewModeling {
     @Published
     var loginResult: LoginResult = .notStarted
     
+    private let context: LAContexting
+    
+    init(context: LAContexting = LAContext()) {
+        self.context = context
+    }
+    
     func login() {
-        let context = LAContext()
         var error: NSError?
         
-        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error){
+        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
             let reason = "Authenticate to access the app"
-            context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason){ success, error in
+            context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { success, error in
                 if success{
                     self.set(result: .loginSucceeded)
                     

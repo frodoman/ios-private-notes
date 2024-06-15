@@ -13,5 +13,6 @@ enum MockError: Error {
     case FailedReadingNotes
     case FailedUpdateNote
     case FailedDeleteNote
+    case FailedLogin
 }
 
