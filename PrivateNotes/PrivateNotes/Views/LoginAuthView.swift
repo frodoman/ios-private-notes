@@ -9,8 +9,7 @@ import SwiftUI
 import LocalAuthentication
 
 struct LoginAuthView<ViewModelType>: View where ViewModelType: LoginViewModeling {
-    
-    @Environment(\.presentationMode) var presentationMode
+
     @Environment(\.isPresented) var isPresented
     
     @EnvironmentObject var rootCoordinator: RootCoordinator
@@ -26,7 +25,6 @@ struct LoginAuthView<ViewModelType>: View where ViewModelType: LoginViewModeling
             
             if case .loginSucceeded = newValue {
                 rootCoordinator.isAuthenticated = true
-                presentationMode.wrappedValue.dismiss()
             }
             else if case .loginFailed(_) = newValue {
                 flowHandler?(newValue)
@@ -36,7 +34,11 @@ struct LoginAuthView<ViewModelType>: View where ViewModelType: LoginViewModeling
     }
     
     private func requestAuthentication() {
+#if targetEnvironment(simulator)
+        rootCoordinator.isAuthenticated = true
+#else
         viewModel.login()
+#endif
     }
     
     @ViewBuilder
