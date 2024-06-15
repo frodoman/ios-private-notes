@@ -12,19 +12,13 @@ struct NoteListView<ViewModelType>: View where ViewModelType: NoteListViewModeli
     
     @EnvironmentObject var rootCoordinator: RootCoordinator
     
-    @ObservedObject
-    var viewModel: ViewModelType
+    @ObservedObject var viewModel: ViewModelType
     
     var flowHandler: NoteFlowHandler?
     
     var body: some View {
 
         notesContentView()
-        .onChange(of: rootCoordinator.isAuthenticated) { newValue in
-            if newValue {
-                viewModel.fetchNotes()
-            }
-        }
         .toolbar {
             ToolbarItem {
                 Button("New", systemImage: "plus") {
@@ -51,18 +45,12 @@ struct NoteListView<ViewModelType>: View where ViewModelType: NoteListViewModeli
             switch (viewModel.status) {
                 
             case .notStarted,
-                 .fetching,
-                 .deleted:
+                 .fetching:
                 VStack {
                     Spacer()
                     ProgressView()
                     Spacer()
-                    Button {
-                        viewModel.fetchNotes()
-                    } label: {
-                        CTALabel(title: "Refresh")
-                    }
-
+                    refreshButton()
                 }
                
             case .error(let error):
@@ -77,10 +65,26 @@ struct NoteListView<ViewModelType>: View where ViewModelType: NoteListViewModeli
                     }
                     .onDelete(perform: deleteItems)
                 }
-                
+            case .deleted(let indexes):
+                VStack {
+                    Spacer()
+                    CTALabel(title: "Note deleted: \(indexes)",
+                             style: .secondary)
+                    Spacer()
+                    refreshButton()
+                }
             }
             Spacer()
             Text("Swipe to left on a cell to delete")
+        }
+    }
+    
+    @ViewBuilder
+    func refreshButton() -> some View {
+        Button {
+            viewModel.fetchNotes()
+        } label: {
+            CTALabel(title: "Refresh")
         }
     }
 }
