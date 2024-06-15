@@ -20,6 +20,11 @@ struct ContentView: View {
                         .fullScreenCover(isPresented: $showLogin) {
                             LoginView()
                         }
+                        .onChange(of: rootCoordinator.isAuthenticated) { newValue in
+                            if newValue {
+                                showLogin = false
+                            }
+                        }
     }
 }
 
