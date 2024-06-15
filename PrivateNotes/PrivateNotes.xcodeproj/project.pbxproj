@@ -41,6 +41,7 @@
 		87A9CF1A2C1C35760051F4C7 /* NoteListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A9CF192C1C35760051F4C7 /* NoteListViewModelTests.swift */; };
 		87A9CF1C2C1C44680051F4C7 /* NoteDetailsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A9CF1B2C1C44680051F4C7 /* NoteDetailsViewModelTests.swift */; };
 		87A9CF1E2C1E40D50051F4C7 /* LAContexting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A9CF1D2C1E40D50051F4C7 /* LAContexting.swift */; };
+		87A9CF202C1E44910051F4C7 /* LoginViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A9CF1F2C1E44910051F4C7 /* LoginViewModelTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -99,6 +100,7 @@
 		87A9CF192C1C35760051F4C7 /* NoteListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteListViewModelTests.swift; sourceTree = "<group>"; };
 		87A9CF1B2C1C44680051F4C7 /* NoteDetailsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDetailsViewModelTests.swift; sourceTree = "<group>"; };
 		87A9CF1D2C1E40D50051F4C7 /* LAContexting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LAContexting.swift; sourceTree = "<group>"; };
+		87A9CF1F2C1E44910051F4C7 /* LoginViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModelTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,6 +180,7 @@
 			children = (
 				87A9CF192C1C35760051F4C7 /* NoteListViewModelTests.swift */,
 				87A9CF1B2C1C44680051F4C7 /* NoteDetailsViewModelTests.swift */,
+				87A9CF1F2C1E44910051F4C7 /* LoginViewModelTests.swift */,
 			);
 			path = PrivateNotesTests;
 			sourceTree = "<group>";
@@ -447,6 +450,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				87A9CF202C1E44910051F4C7 /* LoginViewModelTests.swift in Sources */,
 				87A9CF1A2C1C35760051F4C7 /* NoteListViewModelTests.swift in Sources */,
 				87A9CF1C2C1C44680051F4C7 /* NoteDetailsViewModelTests.swift in Sources */,
 			);

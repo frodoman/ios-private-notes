@@ -15,6 +15,22 @@ enum LoginError: Error {
     case authenticatedFailed(Error)
 }
 
+extension LoginError: Equatable {
+    static func == (lhs: LoginError, rhs: LoginError) -> Bool {
+        var theSame = false
+        switch (lhs, rhs) {
+        case (.biomatricNotAvailable, .biomatricNotAvailable),
+            (.authenticatedFailed, .authenticatedFailed):
+            theSame = true
+        default:
+            break
+        }
+        return theSame
+    }
+    
+    
+}
+
 enum LoginResult {
     case notStarted
     case loginSucceeded
@@ -29,7 +45,17 @@ extension LoginResult: Identifiable {
 
 extension LoginResult: Hashable {
     static func == (lhs: LoginResult, rhs: LoginResult) -> Bool {
-        lhs.id == rhs.id
+        var theSame = false
+        switch (lhs, rhs) {
+        case (.loginSucceeded, .loginSucceeded),
+             (.notStarted, .notStarted),
+             (.loginFailed, .loginFailed):
+            theSame = true
+
+        default:
+            theSame = lhs.id == rhs.id
+        }
+        return theSame
     }
     
     func hash(into hasher: inout Hasher) {
