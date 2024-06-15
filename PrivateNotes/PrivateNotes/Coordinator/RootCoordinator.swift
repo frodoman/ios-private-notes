@@ -11,7 +11,6 @@ import SwiftUI
 final class RootCoordinator: ObservableObject {
     @Published var navigationPath: NavigationPath
     
-    //NOTE: - for simmulator testing, set the following to true
     @Published var isAuthenticated: Bool = false
     
     let viewContext: NSManagedObjectContext

@@ -16,7 +16,6 @@ struct ContentView: View {
         NoteCoordinator(navigationPath: $rootCoordinator.navigationPath,
                         viewContext: rootCoordinator.viewContext)
                         .view()
-                        //NOTE: - for simmulator testing, comment out the following 
                         .fullScreenCover(isPresented: $showLogin) {
                             LoginView()
                         }
